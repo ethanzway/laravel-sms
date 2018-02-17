@@ -1,0 +1,23 @@
+{
+    "name": "gw19900524/laravel-sms",
+    "keywords": ["laravel", "sms"],
+    "description": "Laravel SMS Service Provider",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ethan"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "guzzlehttp/guzzle": "~5.0|~6.0",
+        "monolog/monolog": "^1.17",
+        "illuminate/support": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gw19900524\\Sms\\": "src/"
+        }
+    }
+}
