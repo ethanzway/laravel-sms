@@ -1,6 +1,6 @@
 <?php
 
-namespace Gw19900524\Sms\Support;
+namespace Ethanzway\Sms\Support;
 
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\NullHandler;

@@ -1,5 +1,5 @@
 {
-    "name": "gw19900524/laravel-sms",
+    "name": "ethanzway/laravel-sms",
     "keywords": ["laravel", "sms"],
     "description": "Laravel SMS Service Provider",
     "type": "library",
@@ -17,7 +17,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Gw19900524\\Sms\\": "src/"
+            "Ethanzway\\Sms\\": "src/"
+        }
+    },
+	"extra": {
+        "laravel": {
+            "providers": [
+                "Ethanzway\\Sms\\SmsServiceProvider"
+            ],
+            "aliases": {
+                "Sms": "Ethanzway\\Sms\\Facades\\SmsFacade"
+            }
         }
     }
 }

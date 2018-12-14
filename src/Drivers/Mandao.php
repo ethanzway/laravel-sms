@@ -1,10 +1,10 @@
 <?php
 
-namespace Gw19900524\Sms\Drivers;
+namespace Ethanzway\Sms\Drivers;
 
 use Exception;
 use GuzzleHttp\Client as HttpClient;
-use gw19900524\sms\Support\Log;
+use ethanzway\sms\Support\Log;
 
 class Mandao
 {
@@ -18,16 +18,16 @@ class Mandao
     /**
      *
      * Send the message to the mobile.
-     * 
+     *
      * @param  string   $mobile
      * @param  string  $content
      * @return bool
      */
     public function send($mobile, $content)
     {
-        $argv = array( 
+        $argv = array(
             'sn' => $this->getSn(),
-            'pwd' => strtoupper(md5($this->getSn().$this->getSecret())), 
+            'pwd' => strtoupper(md5($this->getSn().$this->getSecret())),
             'mobile' => $mobile ?? '',
             'content' => $content ?? '',
             'ext' => '',
@@ -35,7 +35,7 @@ class Mandao
             'rrid' => '',
         );
         try {
-            $result = (new HttpClient())->request('POST', $this->getUrl(),  ['form_params' => $argv])->getBody()->getContents();
+            $result = (new HttpClient())->request('POST', $this->getUrl(), ['form_params' => $argv])->getBody()->getContents();
             preg_match('/<string xmlns="http:\/\/tempuri.org\/">(.*)<\/string>/', $result, $matches);
             if ($matches[1] > 1) {
                 Log::info('Success', array('mobile' => substr($mobile, 0, 3) . '****' . substr($mobile, -4), 'content' => iconv('gb2312', 'utf-8//IGNORE', $content)));
@@ -63,7 +63,6 @@ class Mandao
      */
     public function setParameter($key, $value)
     {
-        
         $this->parameters[$key] = $value;
 
         return $this;

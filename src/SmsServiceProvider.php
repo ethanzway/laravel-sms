@@ -1,17 +1,17 @@
 <?php
 
-namespace Gw19900524\Sms;
+namespace Ethanzway\Sms;
 
 use Illuminate\Support\ServiceProvider;
 
 class SmsServiceProvider extends ServiceProvider
 {
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defere = true;
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defere = true;
     
     /**
      * Bootstrap the application services.
@@ -20,9 +20,9 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Publish config
-        $configPath = __DIR__ . '/Config/config.php';
-        $this->publishes([$configPath => config_path('laravel-sms.php')], 'config');
+        $this->publishes([
+            __DIR__ . '/../config/config.php' => config_path('sms.php')
+        ]);
     }
 
     /**
@@ -32,9 +32,9 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('sms', function($app){
-            $factory = new \Gw19900524\Sms\SmsFactory;
-            $manager = new \Gw19900524\Sms\SmsManager($app, $factory);
+        $this->app->singleton('sms', function ($app) {
+            $factory = new \Ethanzway\Sms\SmsFactory;
+            $manager = new \Ethanzway\Sms\SmsManager($app, $factory);
             return $manager;
         });
         $this->app->alias('sms', SmsManager::class);

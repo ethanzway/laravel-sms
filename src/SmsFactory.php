@@ -1,6 +1,6 @@
 <?php
 
-namespace Gw19900524\Sms;
+namespace Ethanzway\Sms;
 
 class SmsFactory
 {
@@ -12,7 +12,7 @@ class SmsFactory
      */
     public function create($class)
     {
-        $class = trim('\\Gw19900524\\Sms\\Drivers\\'.$class, "\\");
+        $class = trim('\\Ethanzway\\Sms\\Drivers\\'.$class, "\\");
         if (!class_exists($class)) {
             throw new \UnexpectedValueException("Driver [$class] is not defined.");
         }

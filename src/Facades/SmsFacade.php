@@ -1,6 +1,6 @@
 <?php
 
-namespace Gw19900524\Sms\Facades;
+namespace Ethanzway\Sms\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
