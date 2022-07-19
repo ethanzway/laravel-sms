@@ -10,38 +10,14 @@ use Monolog\Logger;
 
 class SmsManager
 {
-    /**
-     * The application instance.
-     *
-     * @var \Illuminate\Foundation\Application
-     */
     protected $app;
 
-    /**
-     * Omnipay Factory Instance
-     * @var \Omnipay\Common\GatewayFactory
-     */
     protected $factory;
 
-    /**
-     * The current driver to use
-     * @var string
-     */
     protected $driver;
 
-    /**
-     * The array of resolved queue connections.
-     *
-     * @var array
-     */
     protected $drivers = [];
-    
-    /**
-     * Create a new sms manager instance.
-     *
-     * @param  \Illuminate\Foundation\Application $app
-     * @param $factory
-     */
+
     public function __construct($app, $factory)
     {
         $this->app = $app;
@@ -57,9 +33,9 @@ class SmsManager
 
         $logger = new Logger('laravelsms');
 
-        if (!$this->app['config']["sms.debug"] || defined('PHPUNIT_RUNNING')) {
+        if (!$this->app['config']['sms.debug'] || defined('PHPUNIT_RUNNING')) {
             $logger->pushHandler(new NullHandler());
-        } elseif ($logFile = $this->app['config']["sms.log.file"]) {
+        } elseif ($logFile = $this->app['config']['sms.log.file']) {
             $logger->pushHandler(
                 new StreamHandler(
                 $logFile,
@@ -72,12 +48,7 @@ class SmsManager
 
         Log::setLogger($logger);
     }
-    
-    /**
-     * Get an instance of the specified driver
-     * @param  index of config array to use
-     * @return Ethanzway\Sms\Drivers\AbstractDriver
-     */
+
     public function driver($name = null)
     {
         $name = $name ?: $this->getDefault();
@@ -94,12 +65,12 @@ class SmsManager
         $config = $this->getConfig($name);
 
         if (is_null($config)) {
-            throw new \UnexpectedValueException("Driver [$name] is not defined.");
+            throw new \UnexpectedValueException('Driver [$name] is not defined.');
         }
 
         $driver = $this->factory->create($config['clazz']);
 
-        $class = trim('\\Ethanzway\\Sms\\Drivers\\' . $config['clazz'], "\\");
+        $class = trim('\\Ethanzway\\Sms\\Drivers\\' . $config['clazz'], '\\');
 
         $reflection = new \ReflectionClass($class);
         
@@ -121,7 +92,7 @@ class SmsManager
 
     protected function getConfig($name)
     {
-        return $this->app['config']["sms.drivers.{$name}"];
+        return $this->app['config']['sms.drivers'][$name];
     }
 
     public function __call($method, $parameters)

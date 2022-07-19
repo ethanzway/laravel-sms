@@ -14,15 +14,7 @@ class Mandao
         'sn' => '',
         'secret' => '',
     ];
-    
-    /**
-     *
-     * Send the message to the mobile.
-     *
-     * @param  string   $mobile
-     * @param  string  $content
-     * @return bool
-     */
+
     public function send($mobile, $content)
     {
         $argv = array(
@@ -47,98 +39,53 @@ class Mandao
         }
     }
 
-    /**
-     * @param  string $key
-     * @return mixed
-     */
     public function getParameter($key)
     {
         return $this->parameters[$key];
     }
 
-    /**
-     * @param  string $key
-     * @param  mixed  $value
-     * @return $this
-     */
     public function setParameter($key, $value)
     {
         $this->parameters[$key] = $value;
 
         return $this;
     }
-    
-    /**
-     * @param $value
-     *
-     * @return $this
-     */
+
     public function setUrl($value)
     {
         return $this->setParameter('url', $value);
     }
-    
-    /**
-     *
-     * @return mixed
-     */
+
     public function getUrl()
     {
         return $this->getParameter('url');
     }
-    
-    /**
-     * @param $value
-     *
-     * @return $this
-     */
+
     public function setPort($value)
     {
         return $this->setParameter('port', $value);
     }
-    
-    /**
-     *
-     * @return mixed
-     */
+
     public function getPort()
     {
         return $this->getParameter('port');
     }
-    
-    /**
-     * @param $value
-     *
-     * @return $this
-     */
+
     public function setSn($value)
     {
         return $this->setParameter('sn', $value);
     }
-    
-    /**
-     *
-     * @return mixed
-     */
+
     public function getSn()
     {
         return $this->getParameter('sn');
     }
-    
-    /**
-     * @param $value
-     *
-     * @return $this
-     */
+
     public function setSecret($value)
     {
         return $this->setParameter('secret', $value);
     }
-    
-    /**
-     *
-     * @return mixed
-     */
+
     public function getSecret()
     {
         return $this->getParameter('secret');
